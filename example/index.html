@@ -22,6 +22,13 @@
 
       var animation = require('component-animate-cubic-bezier-curve');
       animation(20.5, 20.5, 40.5, 100.5 , 200.5, 200.5, 220.5, 20.5)
+        .ease(function(t, b, c, d) {
+          t /= d/2;
+          if (t < 1) {
+            return c / 2 * t * t * t + b;
+          }
+          return c / 2 * ((t -= 2) * t * t + 2) + b;
+        })
         .color('deepskyblue')
         .draw(canvas);
 

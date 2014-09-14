@@ -62,7 +62,6 @@ yields ...
 
 ![](https://dl.dropbox.com/u/30162278/component-animate-cubic-bezier-curve-b.png)
 
-
 Example
 ---
 
@@ -72,7 +71,7 @@ See [demo](http://component.herokuapp.com/#/53e3c7ea7d65b41900215c33)
 
 ## Api
 
-### animation(ax, ay, bx, by, cx, cy, dx, dy)
+### Animation(ax, ay, bx, by, cx, cy, dx, dy)
 
   Initialize a new Animation with `ax`, `ay`, `bx`, `by`, `cx`, `cy`, `dx` and `dy` as
 
@@ -83,7 +82,32 @@ See [demo](http://component.herokuapp.com/#/53e3c7ea7d65b41900215c33)
 
 ### Animation#color(string)
 
-  Set the stroke style, which the animation will use
+  Set the stroke style, which the animation will use. For example,
+
+  ```javascript
+    var animation = require('component-animate-cubic-bezier-curve');
+    animation(20.5, 20.5, 40.5, 100.5 , 200.5, 200.5, 220.5, 20.5)
+      .color('deepskyblue')
+      .draw(canvas);
+  ```
+
+### Animation#ease(function)
+
+  Apply easing `function`. For example,
+
+  ```javascript
+    var animation = require('component-animate-cubic-bezier-curve');
+    animation(20.5, 20.5, 40.5, 100.5 , 200.5, 200.5, 220.5, 20.5)
+      .ease(function(t, b, c, d) {
+        t /= d/2;
+        if (t < 1) {
+          return c / 2 * t * t * t + b;
+        }
+        return c / 2 * ((t -= 2) * t * t + 2) + b;
+      })
+      .color('deepskyblue')
+      .draw(canvas);
+  ```
 
 ### Animation#draw(canvas)
 
